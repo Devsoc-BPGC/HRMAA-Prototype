@@ -50,8 +50,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/ecg_cv_ma"
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
@@ -69,8 +69,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fitbit_cv_ma"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
             app:layout_constraintBottom_toBottomOf="@+id/ppg_cv_ma"
@@ -80,8 +80,8 @@
             app:layout_constraintEnd_toStartOf="@id/ecg_cv_ma">
 
             <ImageView
-                android:layout_width="54dp"
-                android:layout_height="66dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:src="@drawable/ic_icons8_fitbit" />
 
@@ -89,9 +89,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/ppg_cv_ma"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
 
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
