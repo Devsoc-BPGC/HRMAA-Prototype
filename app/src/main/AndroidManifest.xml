@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.devsoc.hrmaa">
+    <!-- To check whether healthcore apk is installed or not -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -14,15 +18,18 @@
         android:theme="@style/Theme.HRMAA_PROTOTYPE"
         tools:targetApi="31">
         <activity
-            android:name=".FitbitActivity"
+            android:name=".healthConnect.HealthConnectActivity"
             android:exported="false" />
         <activity
-            android:name=".ECGActivity"
+            android:name=".fitbit.FitbitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ecg.ECGActivity"
             android:exported="false"
             android:label="@string/title_activity_ecgactivity"
             android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
         <activity
-            android:name=".PPGActivity"
+            android:name=".ppg.PPGActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
