@@ -12,11 +12,9 @@
             android:id="@+id/hr_monitor_cv_ma"
             android:layout_width="150dp"
             android:layout_height="180dp"
+            android:layout_marginTop="100dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="30dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -52,21 +50,22 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/ecg_cv_ma"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/ecg_cv_ma"
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/fitbit_cv_ma"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fitbit_cv_ma"
-            app:layout_constraintTop_toTopOf="@+id/fitbit_cv_ma">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ppg_cv_ma"
+            app:layout_constraintTop_toBottomOf="@+id/hr_monitor_cv_ma">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ecg_icon"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:src="@drawable/ecg_icon" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -76,30 +75,30 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
             app:layout_constraintBottom_toBottomOf="@+id/ppg_cv_ma"
-            app:layout_constraintTop_toTopOf="@+id/ppg_cv_ma"
-            tools:layout_editor_absoluteX="155dp"
-            app:layout_constraintStart_toEndOf="@id/ppg_cv_ma"
-            app:layout_constraintEnd_toStartOf="@id/ecg_cv_ma">
+            app:layout_constraintEnd_toStartOf="@+id/ppg_cv_ma"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/hc_cv_ma"
+            app:layout_constraintTop_toTopOf="@+id/ppg_cv_ma">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
-                android:src="@drawable/health_connect" />
+                android:src="@drawable/ic_icons8_fitbit" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/ppg_cv_ma"
             android:layout_width="80dp"
-
             android:layout_height="80dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/fitbit_cv_ma"
-            app:layout_constraintStart_toEndOf="@id/hr_monitor_cv_ma"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@+id/ecg_cv_ma"
+            app:layout_constraintEnd_toStartOf="@+id/ecg_cv_ma"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fitbit_cv_ma"
+            app:layout_constraintTop_toTopOf="@+id/ecg_cv_ma">
 
             <ImageView
                 android:id="@+id/ppg_iv_ma"
@@ -107,6 +106,27 @@
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
                 android:src="@drawable/ppg_icon" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hc_cv_ma"
+
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fitbit_cv_ma"
+            app:layout_constraintEnd_toStartOf="@+id/fitbit_cv_ma"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fitbit_cv_ma">
+
+            <ImageView
+                android:id="@+id/hc_iv_ma"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:src="@drawable/health_connect" />
         </androidx.cardview.widget.CardView>
 
 
