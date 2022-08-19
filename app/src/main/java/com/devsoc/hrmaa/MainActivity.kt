@@ -1,4 +1,6 @@
 package com.devsoc.hrmaa
+
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,FitbitActivity::class.java))
         }
         binding.ppgCvMa.setOnClickListener{
-            startActivity(Intent(this,PPGActivity::class.java))
+            startActivity(Intent(this, PPGActivity::class.java))
         }
         binding.ecgCvMa.setOnClickListener{
             startActivity(Intent(this,ECGActivity::class.java))
