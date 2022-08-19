@@ -26,7 +26,10 @@
         android:theme="@style/Theme.HRMAA_PROTOTYPE"
         tools:targetApi="31">
         <activity
-            android:name=".SampleCommunicationActivity"
+            android:name=".bluetooth.AvailableDevicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".bluetooth.SampleCommunicationActivity"
             android:exported="false" />
         <activity
             android:name=".healthConnect.HealthConnectActivity"
