@@ -1,8 +1,11 @@
 package com.devsoc.hrmaa
+
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.devsoc.hrmaa.bluetooth.AvailableDevicesActivity
 import com.devsoc.hrmaa.databinding.ActivityMainBinding
 import com.devsoc.hrmaa.ecg.ECGActivity
 import com.devsoc.hrmaa.fitbit.FitbitActivity
@@ -24,10 +27,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,FitbitActivity::class.java))
         }
         binding.ppgCvMa.setOnClickListener{
-            startActivity(Intent(this,PPGActivity::class.java))
+            startActivity(Intent(this, PPGActivity::class.java))
         }
         binding.ecgCvMa.setOnClickListener{
-            startActivity(Intent(this,ECGActivity::class.java))
+            startActivity(Intent(this,AvailableDevicesActivity::class.java))
         }
 
 

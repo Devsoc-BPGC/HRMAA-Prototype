@@ -3,10 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Development/HRMAA-Prototype/app/src/main/res/layout/activity_fitbit.xml" value="0.23324275362318841" />
+        <entry key="..\:/Development/HRMAA-Prototype/app/src/main/res/layout/activity_main.xml" value="0.23324275362318841" />
+        <entry key="..\:/Development/HRMAA-Prototype/app/src/main/res/layout/activity_ppgactivity.xml" value="0.22826086956521738" />
+        <entry key="..\:/Development/HRMAA-Prototype/app/src/main/res/menu/menu.xml" value="0.25" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout-land/activity_main.xml" value="0.21164021164021163" />
+        <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_available_devices.xml" value="0.25" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_fitbit.xml" value="0.25" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_health_connect.xml" value="0.25" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_sample_communication.xml" value="0.25" />
+        <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/device_card.xml" value="0.25" />
         <entry key="..\:/Users/acer/Downloads/fitbitter-master/fitbitter-master/HRMAA_PROTOTYPE/app/src/main/res/drawable/ppg_icon.xml" value="0.2595" />
         <entry key="..\:/Users/acer/Downloads/fitbitter-master/fitbitter-master/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
       </map>
