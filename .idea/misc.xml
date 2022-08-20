@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/HRMAA-Prototype/app/src/main/res/layout/activity_fitbit.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/HRMAA-Prototype/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/HRMAA-Prototype/app/src/main/res/layout/fragment_fitbit_auth.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/HRMAA-Prototype/app/src/main/res/layout/fragment_fitbit_redirect.xml" value="0.1" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout-land/activity_main.xml" value="0.21164021164021163" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_fitbit.xml" value="0.25" />
         <entry key="..\:/Users/acer/Desktop/HRMAA_PROTOTYPE/app/src/main/res/layout/activity_health_connect.xml" value="0.25" />
