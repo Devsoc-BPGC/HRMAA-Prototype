@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fitbit_nav_graph"
+    app:startDestination="@id/fitbitRedirectFragment">
+
+    <fragment
+        android:id="@+id/fitbitAuthFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitAuthFragment"
+        android:label="FitbitAuthFragment" />
+    <fragment
+        android:id="@+id/fitbitRedirectFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitRedirectFragment"
+        android:label="FitbitRedirectFragment">
+        <argument
+            android:name="code"
+            android:defaultValue="no_code_found"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:action="android.intent.action.MY_ACTION"
+            app:mimeType="type/subtype"
+            app:uri="hrma://www.example.com/getCode?code={code}#_=_" />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_fitbitAuthFragment"
+            app:destination="@id/fitbitAuthFragment" />
+    </fragment>
+</navigation>
