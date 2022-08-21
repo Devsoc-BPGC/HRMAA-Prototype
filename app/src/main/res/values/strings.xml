@@ -13,5 +13,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="get_authorized">Get authorized</string>
     <string name="no_code_found">No code found</string>
-    <string name="login">Login</string>
+    <string name="login">Login again</string>
 </resources>
