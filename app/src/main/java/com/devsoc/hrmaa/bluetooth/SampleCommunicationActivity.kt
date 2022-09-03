@@ -2,6 +2,7 @@ package com.devsoc.hrmaa.bluetooth
 
 import android.annotation.SuppressLint
 import android.bluetooth.*
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +15,7 @@ import com.devsoc.hrmaa.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
 import java.util.*
 
 @SuppressLint("MissingPermission")
@@ -34,6 +32,7 @@ class SampleCommunicationActivity : AppCompatActivity() {
     lateinit var textView: TextView
     lateinit var btnSendData: Button
     lateinit var etMessage: EditText
+    val SELECT_DEVICE = 0
 
     var TAG= "ME HOO GIAN, ME HU BADA TAKATVAR"
 
@@ -137,26 +136,52 @@ class SampleCommunicationActivity : AppCompatActivity() {
                     apnaServerSocket!!.close()
                 }
                 apnaSocket?.close()
-
+                bluetoothAdapter?.cancelDiscovery()
                 btDevice?.let {
-                    apnaSocket = it.createRfcommSocketToServiceRecord(MY_UUID)
-                    apnaSocket!!.connect()
-                    Log.d("Log", apnaSocket.toString())
+                    apnaSocket = it.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))
+                    try {
+                        apnaSocket?.connect()
+                        Log.d("Log", apnaSocket.toString())
+                    }
+                    catch(e: IOException) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@SampleCommunicationActivity, e.message, Toast.LENGTH_SHORT).show()
+                        }
+//                        this.cancel("Hag diya + $e")
+                    }
                 }
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@SampleCommunicationActivity,"Connected to ${apnaSocket.toString()}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SampleCommunicationActivity,"Connected to ${apnaSocket?.remoteDevice?.name} \n ${apnaSocket.toString()}",Toast.LENGTH_SHORT).show()
                 }
                 inStream =apnaSocket?.inputStream
                 outStream=apnaSocket?.outputStream
 
                 try{
-                    outStream?.write(messageByteArray)
+                    outStream?.write(1)
                     if(outStream==null){
                         Log.d(TAG,"outStream is null")
                     }
                 }
                 catch (e: IOException) {
                     Log.e(TAG, "Error occurred when sending data", e)
+                }
+                val reader = BufferedReader(InputStreamReader(inStream))
+
+                while (true) {
+                    outStream?.write(1)
+                    var currStr=""
+                    var numBytes = try {
+                        currStr = reader.readLine()
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@SampleCommunicationActivity,currStr,Toast.LENGTH_SHORT).show()
+                        }
+                        Log.d(TAG,currStr)
+                        buffer = ByteArray(1024)                            //we have to clear byteArray
+                    }
+                    catch (e: IOException) {
+                        Log.d(TAG, "Input stream was disconnected", e)
+                        break
+                    }
                 }
             }
         }
@@ -175,5 +200,25 @@ class SampleCommunicationActivity : AppCompatActivity() {
                 Log.e(TAG, "Error occurred when sending data", e)
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SELECT_DEVICE && resultCode == RESULT_OK) {
+            val name = data?.getStringExtra("devName")
+            val address = data!!.getStringExtra("devAddress")
+            btDevice= bluetoothAdapter?.getRemoteDevice(address)
+            if(btDevice ==null){
+                Toast.makeText(this,"btDevice is null",Toast.LENGTH_SHORT).show()
+            }
+            Toast.makeText(this,name +"\n"+address,Toast.LENGTH_SHORT).show()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        apnaSocket?.close()
+        bluetoothAdapter?.cancelDiscovery()
+        bluetoothAdapter?.disable()
     }
 }
