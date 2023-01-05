@@ -18,7 +18,7 @@ class FitbitAuthFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fitbit_auth, container, false)
         return binding.root
     }
@@ -26,7 +26,7 @@ class FitbitAuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.authBtBvFaf.setOnClickListener {
-            val url : String = "https://www.fitbit.com/oauth2/authorize?client_id=238QCY&redirect_url=hrma://www.example.com/getCode&response_type=code&scope=activity heartrate nutrition oxygen_saturation%20respiratory_rate%20settings%20sleep%20temperature%20weight"
+            val url = "https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=238QCY&scope=activity+cardio_fitness+electrocardiogram+heartrate+location+nutrition+oxygen_saturation+profile+respiratory_rate+settings+sleep+social+temperature+weight"
             val builder : CustomTabsIntent.Builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(requireContext(), Uri.parse(url))

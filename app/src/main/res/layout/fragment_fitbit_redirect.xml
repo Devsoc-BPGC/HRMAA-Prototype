@@ -13,6 +13,7 @@
         tools:context=".fitbit.fragments.FitbitAuthFragment">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/code_cv_frf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
@@ -20,20 +21,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/code_tv_frf"
-                android:padding="8dp"
-                android:layout_margin="8dp"
-                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/white"
+                android:padding="8dp"
                 android:text="@string/no_code_found"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/white"
-                />
+                android:textSize="18sp" />
 
         </androidx.cardview.widget.CardView>
 

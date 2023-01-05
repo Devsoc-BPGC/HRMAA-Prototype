@@ -23,6 +23,14 @@
             app:uri="hrma://www.example.com/getCode?code={code}#_=_" />
         <action
             android:id="@+id/action_fitbitRedirectFragment_to_fitbitAuthFragment"
-            app:destination="@id/fitbitAuthFragment" />
+            app:destination="@id/fitbitAuthFragment"
+            />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_fitbitDataFragment"
+            app:destination="@id/fitbitDataFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fitbitDataFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitDataFragment"
+        android:label="FitbitDataFragment" />
 </navigation>

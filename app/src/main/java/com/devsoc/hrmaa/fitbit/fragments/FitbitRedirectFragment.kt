@@ -2,6 +2,7 @@ package com.devsoc.hrmaa.fitbit.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.devsoc.hrmaa.R
 import com.devsoc.hrmaa.databinding.FragmentFitbitRedirectBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.Date
 
 
 class FitbitRedirectFragment : Fragment() {
 
     private lateinit var binding: FragmentFitbitRedirectBinding
-    val args: FitbitRedirectFragmentArgs by navArgs()
+    private val args: FitbitRedirectFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreference =  getActivity()?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val sharedPreference =  activity?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         if(args.code != "no_code_found"){
             val editor = sharedPreference?.edit()
             editor?.putString("userId",args.code)
@@ -38,8 +43,9 @@ class FitbitRedirectFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fitbit_redirect, container, false)
+
         return binding.root
 
     }
@@ -50,8 +56,14 @@ class FitbitRedirectFragment : Fragment() {
             val navAction = FitbitRedirectFragmentDirections.actionFitbitRedirectFragmentToFitbitAuthFragment()
             view.findNavController().navigate(navAction)
         }
-        val sharedPreference =  getActivity()?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val sharedPreference =  activity?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val userId : String = sharedPreference?.getString("userId", null)!!
-        binding.codeTvFrf.setText(userId)
+        binding.codeTvFrf.text = userId
+        Log.d("Auth Code", userId)
+
+        binding.codeCvFrf.setOnClickListener {
+            view.findNavController().navigate(R.id.action_fitbitRedirectFragment_to_fitbitDataFragment)
+        }
+
     }
 }
