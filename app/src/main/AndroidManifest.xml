@@ -34,7 +34,17 @@
             android:exported="false" />
         <activity
             android:name=".healthConnect.HealthConnectActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:enabled="true">
+            <!-- TODO: Required to specify which Health Connect permissions the app can request -->
+            <meta-data
+                android:name="health_permissions"
+                android:resource="@array/health_permissions"/>
+            <!-- (b) handle intent -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".fitbit.FitbitActivity"
             android:exported="false" />
