@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
         binding.hcCvMa.setOnClickListener {
             //launch only if Health Connect is installed on device
             if (HealthConnectClient.isAvailable(this)) {
