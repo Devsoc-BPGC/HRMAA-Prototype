@@ -12,6 +12,7 @@ import com.devsoc.hrmaa.R
 import com.devsoc.hrmaa.databinding.FragmentFitbitDataBinding
 import com.devsoc.hrmaa.fitbit.dataclasses.AuthInfo
 import com.devsoc.hrmaa.fitbit.dataclasses.EcgData
+import com.devsoc.hrmaa.fitbit.dataclasses.HeartRateSeries
 import com.devsoc.hrmaa.fitbit.dataclasses.TokenData
 import com.devsoc.hrmaa.fitbit.interfaces.RestApi
 import com.devsoc.hrmaa.fitbit.objects.ServiceBuilder
@@ -55,7 +56,7 @@ class FitbitDataFragment : Fragment() {
                         //check if access token has expired and refresh if expired
                         if (Date().time - time < 28800000) {
                             val accToken = value.getString("access_token")!!
-                            getEcgInfo(accToken)
+                            getHeartRateSeries(accToken, "2019-01-01", "2020-01-01")
                         } else {
                             val refToken = value.getString("refresh_token")!!
                             refresh(refToken, authInfo)
@@ -105,31 +106,6 @@ class FitbitDataFragment : Fragment() {
         )
     }
 
-    fun getEcgInfo(accessToken: String) {
-        val headerMap = mutableMapOf<String, String>()
-        headerMap["authorization"] = "Bearer $accessToken"
-
-        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
-        retrofit.getEcgData(headerMap).enqueue(
-            object : Callback<EcgData> {
-                override fun onFailure(call: Call<EcgData>, t: Throwable) {
-                    Log.d("Service", t.message + "")
-                }
-
-                override fun onResponse(call: Call<EcgData>, response: Response<EcgData>) {
-                    val ecgData = response.body()
-                    Log.d("ECG Response Code", "".plus(response.raw().code))
-                    if (response.raw().code == 200 && ecgData != null) {
-                        val ecgReadings = ecgData.ecgReadings
-                        binding.dataTvFdf.text = ecgData.toString()
-                    } else {
-                        Log.d("ECG Response", response.raw().message)
-                    }
-                }
-            }
-        )
-    }
-
     private fun refresh(refreshToken: String, authInfo: AuthInfo) {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.refresh(
@@ -158,6 +134,55 @@ class FitbitDataFragment : Fragment() {
                         )
                         dRef.set(timestamp)
                         getEcgInfo(accessToken)
+                    }
+                }
+            }
+        )
+    }
+
+    fun getEcgInfo(accessToken: String) {
+        val headerMap = mutableMapOf<String, String>()
+        headerMap["authorization"] = "Bearer $accessToken"
+
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.getEcgData(headerMap).enqueue(
+            object : Callback<EcgData> {
+                override fun onFailure(call: Call<EcgData>, t: Throwable) {
+                    Log.d("Service", t.message + "")
+                }
+
+                override fun onResponse(call: Call<EcgData>, response: Response<EcgData>) {
+                    val ecgData = response.body()
+                    Log.d("ECG Response Code", "".plus(response.raw().code))
+                    if (response.raw().code == 200 && ecgData != null) {
+                        val ecgReadings = ecgData.ecgReadings
+                        //TODO: process ECG data
+                    } else {
+                        Log.d("ECG Response", response.raw().message)
+                    }
+                }
+            }
+        )
+    }
+
+    private fun getHeartRateSeries(accessToken: String, startDate: String, endDate: String){
+        val headerMap = mutableMapOf<String, String>()
+        headerMap["authorization"] = "Bearer $accessToken"
+
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.getHeartRateSeries(headerMap, startDate, endDate).enqueue(
+            object : Callback<HeartRateSeries> {
+                override fun onFailure(call: Call<HeartRateSeries>, t: Throwable) {
+                    Log.d("Service", t.message + "")
+                }
+
+                override fun onResponse(call: Call<HeartRateSeries>, response: Response<HeartRateSeries>) {
+                    val heartRateData = response.body()
+                    Log.d("Heart Rate Response Code", "".plus(response.raw().code))
+                    if (response.raw().code == 200 && heartRateData != null) {
+                        //TODO: process heart rate records
+                    } else {
+                        Log.d("Heart Rate Response", response.raw().message)
                     }
                 }
             }

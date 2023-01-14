@@ -1,6 +1,7 @@
 package com.devsoc.hrmaa.fitbit.interfaces
 
 import com.devsoc.hrmaa.fitbit.dataclasses.EcgData
+import com.devsoc.hrmaa.fitbit.dataclasses.HeartRateSeries
 import com.devsoc.hrmaa.fitbit.dataclasses.TokenData
 import retrofit2.Call
 import retrofit2.http.*
@@ -29,6 +30,13 @@ interface RestApi {
 
     @Headers("accept: application/json")
     @GET("1/user/-/ecg/list.json?afterDate=2022-09-28&sort=asc&limit=1&offset=0")
-    fun getEcgData(@HeaderMap headers: Map<String, String>) : Call<EcgData>
+    fun getEcgData(@HeaderMap headers: Map<String, String>): Call<EcgData>
+
+    @Headers("accept: application/json")
+    @GET("1/user/-/activities/heart/date/{startDate}/{endDate}.json")
+    fun getHeartRateSeries(@HeaderMap headers: Map<String, String>,
+        @Path(value = "startDate", encoded = true) startDate: String,
+        @Path(value = "endDate", encoded = true) endDate: String
+    ): Call<HeartRateSeries>
 
 }
