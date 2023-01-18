@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HRMAA_PROTOTYPE" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--    Don't know why, in older android versions, 10 and below, the app crashes in dark mode, saying that Extended FAB-->
+<!--    requires a theme that inherits Theme.MaterialComponents, on setting the parent of the Theme.HRMAA_-->
+<!--    _Prototype as Theme.MaterialComponenets.DayNight.DarkActionBar.-->
+<!--    Currently changed the parent to Theme.MaterialComponents.DayNight-->
+    <style name="Theme.HRMAA_PROTOTYPE" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/black</item>
@@ -19,7 +23,6 @@
     </style>
     <style name="Theme.HRMAA_PROTOTYPE.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.HRMAA_PROTOTYPE.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <!-- Set the splash screen background, animated icon, and animation duration. -->
