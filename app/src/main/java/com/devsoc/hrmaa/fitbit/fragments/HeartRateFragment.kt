@@ -3,13 +3,14 @@ package com.devsoc.hrmaa.fitbit.fragments
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.devsoc.hrmaa.R
-import com.devsoc.hrmaa.databinding.FragmentFitbitDataBinding
+import com.devsoc.hrmaa.databinding.FragmentEcgDataBinding
+import com.devsoc.hrmaa.databinding.FragmentHeartRateBinding
 import com.devsoc.hrmaa.fitbit.dataclasses.AuthInfo
 import com.devsoc.hrmaa.fitbit.dataclasses.EcgData
 import com.devsoc.hrmaa.fitbit.dataclasses.HeartRateSeries
@@ -22,8 +23,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class FitbitDataFragment : Fragment() {
-    private lateinit var binding: FragmentFitbitDataBinding
+class HeartRateFragment : Fragment() {
+    private lateinit var binding: FragmentHeartRateBinding
     private val clientId: String = "238QCY"
     private val redirectUri: String = "hrmaa://www.example.com/getCode"
     private val fStore = FirebaseFirestore.getInstance()
@@ -33,11 +34,10 @@ class FitbitDataFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fitbit_data, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_heart_rate, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +68,6 @@ class FitbitDataFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun getTokenInfo(authInfo: AuthInfo) {
@@ -98,8 +97,7 @@ class FitbitDataFragment : Fragment() {
                             "uid" to uid
                         )
                         dRef.set(timestamp)
-
-                        getEcgInfo(accessToken)
+                        getHeartRateSeries(accessToken, "2019-01-01", "2020-01-01")
                     }
                 }
             }
@@ -133,32 +131,7 @@ class FitbitDataFragment : Fragment() {
                             "uid" to uid
                         )
                         dRef.set(timestamp)
-                        getEcgInfo(accessToken)
-                    }
-                }
-            }
-        )
-    }
-
-    fun getEcgInfo(accessToken: String) {
-        val headerMap = mutableMapOf<String, String>()
-        headerMap["authorization"] = "Bearer $accessToken"
-
-        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
-        retrofit.getEcgData(headerMap).enqueue(
-            object : Callback<EcgData> {
-                override fun onFailure(call: Call<EcgData>, t: Throwable) {
-                    Log.d("Service", t.message + "")
-                }
-
-                override fun onResponse(call: Call<EcgData>, response: Response<EcgData>) {
-                    val ecgData = response.body()
-                    Log.d("ECG Response Code", "".plus(response.raw().code))
-                    if (response.raw().code == 200 && ecgData != null) {
-                        val ecgReadings = ecgData.ecgReadings
-                        //TODO: process ECG data
-                    } else {
-                        Log.d("ECG Response", response.raw().message)
+                        getHeartRateSeries(accessToken, "2019-01-01", "2020-01-01")
                     }
                 }
             }
@@ -188,5 +161,4 @@ class FitbitDataFragment : Fragment() {
             }
         )
     }
-
 }

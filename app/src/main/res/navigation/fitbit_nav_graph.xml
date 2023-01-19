@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fitbit_nav_graph"
     app:startDestination="@id/fitbitRedirectFragment">
 
@@ -28,9 +29,17 @@
         <action
             android:id="@+id/action_fitbitRedirectFragment_to_fitbitDataFragment"
             app:destination="@id/fitbitDataFragment" />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_heartRateFragment"
+            app:destination="@id/heartRateFragment" />
     </fragment>
     <fragment
         android:id="@+id/fitbitDataFragment"
-        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitDataFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.EcgDataFragment"
         android:label="FitbitDataFragment" />
+    <fragment
+        android:id="@+id/heartRateFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateFragment"
+        android:label="fragment_heart_rate"
+        tools:layout="@layout/fragment_heart_rate" />
 </navigation>

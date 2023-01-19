@@ -39,4 +39,10 @@ interface RestApi {
         @Path(value = "endDate", encoded = true) endDate: String
     ): Call<HeartRateSeries>
 
+    @Headers("accept: application/json")
+    @GET("{path}")
+    fun nextPage(@HeaderMap headers: Map<String, String>,
+                           @Path(value = "path", encoded = true) path: String
+    ): Call<EcgData>
+
 }

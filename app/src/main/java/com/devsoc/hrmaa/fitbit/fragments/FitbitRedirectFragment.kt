@@ -58,11 +58,14 @@ class FitbitRedirectFragment : Fragment() {
         }
         val sharedPreference =  activity?.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val userId : String = sharedPreference?.getString("userId", null)!!
-        binding.codeTvFrf.text = userId
         Log.d("Auth Code", userId)
 
-        binding.codeCvFrf.setOnClickListener {
+        binding.ecgCvFrf.setOnClickListener {
             view.findNavController().navigate(R.id.action_fitbitRedirectFragment_to_fitbitDataFragment)
+        }
+
+        binding.bpmCvFrf.setOnClickListener {
+            view.findNavController().navigate(R.id.action_fitbitRedirectFragment_to_heartRateFragment)
         }
 
     }
