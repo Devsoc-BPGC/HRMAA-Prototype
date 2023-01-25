@@ -8,13 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsoc.hrmaa.R
-import com.devsoc.hrmaa.databinding.FragmentEcgDataBinding
 import com.devsoc.hrmaa.databinding.FragmentHeartRateBinding
-import com.devsoc.hrmaa.fitbit.dataclasses.AuthInfo
-import com.devsoc.hrmaa.fitbit.dataclasses.EcgData
-import com.devsoc.hrmaa.fitbit.dataclasses.HeartRateSeries
-import com.devsoc.hrmaa.fitbit.dataclasses.TokenData
+import com.devsoc.hrmaa.fitbit.adapters.HeartRateAdapter
+import com.devsoc.hrmaa.fitbit.dataclasses.*
 import com.devsoc.hrmaa.fitbit.interfaces.RestApi
 import com.devsoc.hrmaa.fitbit.objects.ServiceBuilder
 import com.google.firebase.firestore.FirebaseFirestore
@@ -108,7 +108,7 @@ class HeartRateFragment : Fragment() {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.refresh(
             authInfo.clientId,
-            authInfo.grant_type,
+            "refresh_token",
             authInfo.redirect_uri,
             refreshToken
         ).enqueue(
@@ -119,7 +119,7 @@ class HeartRateFragment : Fragment() {
 
                 override fun onResponse(call: Call<TokenData>, response: Response<TokenData>) {
                     val tokenData = response.body()
-                    Log.d("Refresh", "".plus(response.raw().code))
+                    Log.d("Refresh", "${response.code()}")
                     if (tokenData != null) {
                         val accessToken = tokenData.access_token
                         val newRefreshToken = tokenData.refresh_token
@@ -153,8 +153,27 @@ class HeartRateFragment : Fragment() {
                     val heartRateData = response.body()
                     Log.d("Heart Rate Response Code", "".plus(response.raw().code))
                     if (response.raw().code == 200 && heartRateData != null) {
-                        //TODO: process heart rate records
+                        val activitiesHeart = heartRateData.activities_heart
+                        if(activitiesHeart != null && activitiesHeart.isNotEmpty()) {
+                            val adapter = HeartRateAdapter(heartRateData.activities_heart)
+                            binding.noDataTvHrf.visibility = View.INVISIBLE
+                            binding.heartRateRvHrf.apply {
+                                visibility = View.VISIBLE
+                                this.adapter = adapter
+                                layoutManager = LinearLayoutManager(context)
+                            }
+                            adapter.onItemClick = {
+                                val action = HeartRateFragmentDirections.actionHeartRateFragmentToHeartRateZonesFragment(it)
+                                findNavController().navigate(action)
+                            }
+                        }
+                        else {
+                            binding.heartRateRvHrf.visibility = View.INVISIBLE
+                            binding.noDataTvHrf.visibility = View.VISIBLE
+                        }
                     } else {
+                        binding.heartRateRvHrf.visibility = View.INVISIBLE
+                        binding.noDataTvHrf.visibility = View.VISIBLE
                         Log.d("Heart Rate Response", response.raw().message)
                     }
                 }

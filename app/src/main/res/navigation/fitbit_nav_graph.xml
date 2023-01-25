@@ -41,5 +41,17 @@
         android:id="@+id/heartRateFragment"
         android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateFragment"
         android:label="fragment_heart_rate"
-        tools:layout="@layout/fragment_heart_rate" />
+        tools:layout="@layout/fragment_heart_rate" >
+        <action
+            android:id="@+id/action_heartRateFragment_to_heartRateZonesFragment"
+            app:destination="@id/heartRateZonesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heartRateZonesFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateZonesFragment"
+        android:label="HeartRateZonesFragment" >
+        <argument
+            android:name="activities"
+            app:argType="com.devsoc.hrmaa.fitbit.dataclasses.ActivitiesHeart"/>
+    </fragment>
 </navigation>

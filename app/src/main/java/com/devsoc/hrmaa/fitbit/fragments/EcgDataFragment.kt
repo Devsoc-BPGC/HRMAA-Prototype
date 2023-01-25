@@ -110,18 +110,18 @@ class EcgDataFragment : Fragment() {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.refresh(
             authInfo.clientId,
-            authInfo.grant_type,
+            "refresh_token",
             authInfo.redirect_uri,
             refreshToken
         ).enqueue(
             object : Callback<TokenData> {
                 override fun onFailure(call: Call<TokenData>, t: Throwable) {
-                    Log.d("Service", t.message + "")
+                    Log.d("Service", t.message.toString())
                 }
 
                 override fun onResponse(call: Call<TokenData>, response: Response<TokenData>) {
                     val tokenData = response.body()
-                    Log.d("Refresh", "".plus(response.raw().code))
+                    Log.d("Refresh", "${response.raw().code}")
                     if (tokenData != null) {
                         val accessToken = tokenData.access_token
                         val newRefreshToken = tokenData.refresh_token
@@ -148,19 +148,17 @@ class EcgDataFragment : Fragment() {
         retrofit.getEcgData(headerMap).enqueue(
             object : Callback<EcgData> {
                 override fun onFailure(call: Call<EcgData>, t: Throwable) {
-                    Log.d("Service", t.message + "")
+                    Log.d("Service", t.message.toString())
                 }
 
                 override fun onResponse(call: Call<EcgData>, response: Response<EcgData>) {
                     val ecgData = response.body()
-                    Log.d("ECG Response Code", "".plus(response.raw().code))
+                    Log.d("ECG Response Code", "${response.raw().code}")
                     if (response.raw().code == 200 && ecgData != null) {
                         val ecgReadings = ecgData.ecgReadings
                         var data = ""
                         if(ecgReadings.isNotEmpty()){
-                            for(i in 1..(ecgReadings[0].numberOfWaveformSample/10)){
-
-                            }
+                            //TODO
                         }
                     } else {
                         Log.d("ECG Response", response.raw().message)
