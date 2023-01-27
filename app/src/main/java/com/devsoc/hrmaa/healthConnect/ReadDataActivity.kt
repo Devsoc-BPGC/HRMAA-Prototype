@@ -8,10 +8,12 @@ import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsoc.hrmaa.databinding.ActivityReadDataBinding
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.ZonedDateTime
+import java.util.*
 
 class ReadDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadDataBinding
@@ -21,7 +23,10 @@ class ReadDataActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
+        val startDate = intent.getStringExtra("start_date").toString()
+        val endDate = intent.getStringExtra("end_date").toString()
+        val sd = Date(startDate.substring(6,10).toInt(), startDate.substring(3,5).toInt(), startDate.substring(0,2).toInt())
+        val ed = Date(endDate.substring(6,10).toInt(), endDate.substring(3,5).toInt(), endDate.substring(0,2).toInt())
         val healthConnectClient = HealthConnectClient.getOrCreate(this)
 
         val requestPermissionActivityContract =
@@ -38,8 +43,8 @@ class ReadDataActivity : AppCompatActivity() {
                 val granted = client.permissionController.getGrantedPermissions(PERMISSIONS)
                 if (granted.containsAll(PERMISSIONS)) {
                     // Permissions already granted
-                    val end = Instant.now()
-                    val start = ZonedDateTime.now().minusYears(5).toInstant()
+                    val end = ed.toInstant()
+                    val start = sd.toInstant()
                     readHeartRateByTimeRange(healthConnectClient, start, end)
 
                 } else {
@@ -66,15 +71,29 @@ class ReadDataActivity : AppCompatActivity() {
                     )
                 )
 
-            if (response.records.isNotEmpty()) {
-                for (rec in response.records) {
-                    //TODO : process each heart rate record
-                    for (hr in rec.samples) {
+            val series = mutableListOf(
+                HeartRateRecord.Sample(Instant.now().minusSeconds(259200), 101),
+                HeartRateRecord.Sample(Instant.now().minusSeconds(172800), 89),
+                HeartRateRecord.Sample(Instant.now().minusSeconds(86400), 69),
+                HeartRateRecord.Sample(Instant.now(), 75)
+            )
+            val adapter = HeartRateSeriesAdapter(series)
+            binding.heartRateSeriesRvRda.apply {
+                this.adapter = adapter
+                layoutManager = LinearLayoutManager(context)
+            }
 
+            if (response.records.isNotEmpty()) {
+                binding.dataTvRdf.text = ""
+                /*for (rec in response.records) {
+                   val adapter = HeartRateSeriesAdapter(rec.samples)
+                    binding.heartRateSeriesRvRda.apply {
+                        this.adapter = adapter
+                        layoutManager = LinearLayoutManager(context)
                     }
-                }
+                }*/
             } else {
-                binding.dataTvRdf.text = "No records found!"
+                //binding.dataTvRdf.text = "No records found!"
             }
 
         }
