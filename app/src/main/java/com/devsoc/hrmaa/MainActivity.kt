@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.health.connect.client.HealthConnectClient
-import com.devsoc.hrmaa.bluetooth.AvailableDevicesActivity
+import com.devsoc.hrmaa.bluetooth.ECGHome
 import com.devsoc.hrmaa.databinding.ActivityMainBinding
-import com.devsoc.hrmaa.ecg.ECGActivity
 import com.devsoc.hrmaa.fitbit.FitbitActivity
 import com.devsoc.hrmaa.healthConnect.HealthConnectActivity
 import com.devsoc.hrmaa.ppg.PPGActivity
@@ -41,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         binding.ppgCvMa.setOnClickListener {
             startActivity(Intent(this, PPGActivity::class.java))
         }
-        binding.ecgCvMa.setOnClickListener {
-            startActivity(Intent(this, AvailableDevicesActivity::class.java))
+        binding.ecgCvMa.setOnClickListener{
+            startActivity(Intent(this, ECGHome::class.java))
         }
 
 

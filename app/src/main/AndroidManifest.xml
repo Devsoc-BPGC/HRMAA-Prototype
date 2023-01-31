@@ -9,7 +9,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- permissions for Bluetooth in Android Devices using API 21 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
@@ -28,7 +28,16 @@
         tools:targetApi="31">
         <activity
             android:name=".healthConnect.DateActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".bluetooth.ECGHome"
+            android:exported="false"
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -36,11 +45,7 @@
         <activity
             android:name=".bluetooth.AvailableDevicesActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
-        <activity
-            android:name=".bluetooth.SampleCommunicationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
         <activity
             android:name=".healthConnect.HealthConnectActivity"
             android:enabled="true"
@@ -58,23 +63,21 @@
         </activity>
         <activity
             android:name=".healthConnect.ReadDataActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
         <activity
             android:name=".fitbit.FitbitActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
-        <activity
-            android:name=".ecg.ECGActivity"
-            android:exported="false"
-            android:label="@string/title_activity_ecgactivity"
             android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
+
         <activity
             android:name=".ppg.PPGActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

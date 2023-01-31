@@ -31,7 +31,8 @@
                 android:fontFamily="@font/orbitron_regular"
                 android:hint="Start Date"
                 android:inputType="datetime"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -69,7 +70,8 @@
                 android:fontFamily="@font/orbitron_regular"
                 android:hint="End Date"
                 android:inputType="datetime"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
