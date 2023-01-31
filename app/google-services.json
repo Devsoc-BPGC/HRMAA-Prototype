@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557049753871",
+    "project_id": "hrmaa-fitbit",
+    "storage_bucket": "hrmaa-fitbit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557049753871:android:dd440e381f00815b5ace7a",
+        "android_client_info": {
+          "package_name": "com.devsoc.hrmaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557049753871-31hlvd6d5m4rc314nm1aiq39ukh2u1lb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnJPVzxFEmzK6d-lA73IddXnysYifj0kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557049753871-31hlvd6d5m4rc314nm1aiq39ukh2u1lb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

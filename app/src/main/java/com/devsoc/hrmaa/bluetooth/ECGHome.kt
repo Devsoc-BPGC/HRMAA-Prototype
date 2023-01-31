@@ -237,6 +237,7 @@ class ECGHome : AppCompatActivity() {
             }
             apnaSocket?.close()
             bluetoothAdapter?.cancelDiscovery()
+
             btDevice?.let {
                 apnaSocket = it.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))
                 try {
@@ -251,72 +252,77 @@ class ECGHome : AppCompatActivity() {
                         Toast.makeText(this@ECGHome, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
 
-            inStream =apnaSocket?.inputStream
-            outStream=apnaSocket?.outputStream
+                inStream =apnaSocket?.inputStream
+                outStream=apnaSocket?.outputStream
 
-            try{
-                outStream?.write(0)
-                if(outStream==null){
-                    Log.d(TAG,"outStream is null")
-                }
-            }
-            catch (e: IOException) {
-                Log.e(TAG, "Error occurred when sending data", e)
-            }
-
-            val reader = BufferedReader(InputStreamReader(inStream))
-
-            var beforeLoopTime = System.currentTimeMillis()
-            while (true) {
                 try{
-                    currStr = reader.readLine()
-                    withContext(Dispatchers.Main) {
-                        val compositeData = currStr.toLong()
-                        ECGDataList.add((compositeData % 10000).toInt())
-                        timeStampList.add(compositeData / 10000)
+                    outStream?.write(0)
+                    if(outStream==null){
+                        Log.d(TAG,"outStream is null")
                     }
-                }
-                catch(e: java.lang.NumberFormatException){
-
                 }
                 catch (e: IOException) {
-                    Log.d(TAG, "Input stream was disconnected", e)
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(this@ECGHome,e.message, Toast.LENGTH_LONG).show()
-                    }
-                    break
+                    Log.e(TAG, "Error occurred when sending data", e)
                 }
 
-                if( (System.currentTimeMillis() - beforeLoopTime) > 20000 ){
-                    Log.d("HeartList",ECGDataList.toString())
-                    Log.d("TimeList",timeStampList.toString())
+                val reader = BufferedReader(InputStreamReader(inStream))
 
-                    try {
-
+                var beforeLoopTime = System.currentTimeMillis()
+                while (true) {
+                    try{
+                        currStr = reader.readLine()
                         withContext(Dispatchers.Main) {
-                            val dataList = module.callAttr(
-                                "get_bpm_metric",
-                                ECGDataList.toIntArray(),
-                                timeStampList.toLongArray()
-                            ).asList()
-                            binding.tvHeartRate.text = dataList.get(0).toString()
-                            Log.d("Contents of List", dataList.toString())
-                            ECGDataList.clear()
-                            timeStampList.clear()
+                            val compositeData = currStr.toLong()
+                            ECGDataList.add((compositeData % 10000).toInt())
+                            timeStampList.add(compositeData / 10000)
                         }
                     }
-                    catch(e: PyException){
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@ECGHome, e.message, Toast.LENGTH_SHORT).show()
-                            Log.e("Error in python script",e.message + "\n" + e.cause + "\n" + e.toString())
-                        }
+                    catch(e: java.lang.NumberFormatException){
+
                     }
-                    finally {
-                        beforeLoopTime = System.currentTimeMillis()
+                    catch (e: IOException) {
+                        Log.d(TAG, "Input stream was disconnected", e)
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(this@ECGHome,e.message, Toast.LENGTH_LONG).show()
+                        }
+                        break
                     }
 
+                    if( (System.currentTimeMillis() - beforeLoopTime) > 20000 ){
+                        Log.d("HeartList",ECGDataList.toString())
+                        Log.d("TimeList",timeStampList.toString())
+
+                        try {
+
+                            withContext(Dispatchers.Main) {
+                                val dataList = module.callAttr(
+                                    "get_bpm_metric",
+                                    ECGDataList.toIntArray(),
+                                    timeStampList.toLongArray()
+                                ).asList()
+                                binding.tvHeartRate.text = dataList.get(0).toString()
+                                Log.d("Contents of List", dataList.toString())
+                                ECGDataList.clear()
+                                timeStampList.clear()
+                            }
+                        }
+                        catch(e: PyException){
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(this@ECGHome, e.message, Toast.LENGTH_SHORT).show()
+                                Log.e("Error in python script",e.message + "\n" + e.cause + "\n" + e.toString())
+                            }
+                        }
+                        finally {
+                            beforeLoopTime = System.currentTimeMillis()
+                        }
+
+                    }
+                }
+            }
+            if( btDevice == null){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@ECGHome,"No Bluetooth Device Selected", Toast.LENGTH_SHORT).show()
                 }
             }
         }
