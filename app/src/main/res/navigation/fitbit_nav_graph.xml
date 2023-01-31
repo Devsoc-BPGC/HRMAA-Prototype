@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fitbit_nav_graph"
+    app:startDestination="@id/fitbitRedirectFragment">
+
+    <fragment
+        android:id="@+id/fitbitAuthFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitAuthFragment"
+        android:label="FitbitAuthFragment" />
+    <fragment
+        android:id="@+id/fitbitRedirectFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.FitbitRedirectFragment"
+        android:label="FitbitRedirectFragment">
+        <argument
+            android:name="code"
+            android:defaultValue="no_code_found"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:action="android.intent.action.MY_ACTION"
+            app:mimeType="type/subtype"
+            app:uri="hrma://www.example.com/getCode?code={code}#_=_" />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_fitbitAuthFragment"
+            app:destination="@id/fitbitAuthFragment"
+            />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_fitbitDataFragment"
+            app:destination="@id/ecgDataFragment" />
+        <action
+            android:id="@+id/action_fitbitRedirectFragment_to_heartRateFragment"
+            app:destination="@id/heartRateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ecgDataFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.EcgDataFragment"
+        android:label="FitbitDataFragment" >
+        <action
+            android:id="@+id/action_fitbitDataFragment_to_ecgGraphFragment"
+            app:destination="@id/ecgGraphFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heartRateFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateFragment"
+        android:label="fragment_heart_rate"
+        tools:layout="@layout/fragment_heart_rate" >
+        <action
+            android:id="@+id/action_heartRateFragment_to_heartRateZonesFragment"
+            app:destination="@id/heartRateZonesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heartRateZonesFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateZonesFragment"
+        android:label="HeartRateZonesFragment" >
+        <argument
+            android:name="activities"
+            app:argType="com.devsoc.hrmaa.fitbit.dataclasses.ActivitiesHeart"/>
+    </fragment>
+    <fragment
+        android:id="@+id/ecgGraphFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.EcgGraphFragment"
+        android:label="EcgGraphFragment" >
+        <action
+            android:id="@+id/action_ecgGraphFragment_to_fitbitDataFragment"
+            app:destination="@id/ecgDataFragment" />
+    </fragment>
+</navigation>
