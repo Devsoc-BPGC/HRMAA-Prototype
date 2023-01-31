@@ -156,8 +156,22 @@ class HeartRateFragment : Fragment() {
                     Log.d("Heart Rate Response Code", "".plus(response.raw().code))
                     if (response.raw().code == 200 && heartRateData != null) {
                         val activitiesHeart = heartRateData.activities_heart
-                        if(activitiesHeart != null && activitiesHeart.isNotEmpty()) {
-                            val adapter = HeartRateAdapter(heartRateData.activities_heart)
+                        if(activitiesHeart == null) {
+                            val zones1 = mutableListOf(
+                                HeartRateZone(1100.0, 120, 90, 30, "Test1"),
+                                HeartRateZone(900.0, 90, 60, 15, "Test2")
+                            )
+                            val zones2 = mutableListOf(
+                                CustomHeartRateZone(1100.0, 120, 90, 30, "Custom1"),
+                                CustomHeartRateZone(1100.0, 120, 90, 30, "Custom2")
+                            )
+                            val activities = mutableListOf(
+                                ActivitiesHeart("2023-01-31", Value(zones2, zones1, 72)),
+                                ActivitiesHeart("2023-01-30", Value(zones2, zones1, 85)),
+                                ActivitiesHeart("2023-01-29", Value(zones2, zones1, 65)),
+                                ActivitiesHeart("2023-01-28", Value(zones2, zones1, 70))
+                            )
+                            val adapter = HeartRateAdapter(activities)
                             binding.noDataTvHrf.visibility = View.INVISIBLE
                             binding.heartRateRvHrf.apply {
                                 visibility = View.VISIBLE

@@ -30,10 +30,11 @@
                 android:id="@+id/ecg_tv_frf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Get ECG Data"
                 android:layout_margin="20dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:fontFamily="@font/orbitron_bold"
+                android:text="Get ECG Data"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -55,10 +56,11 @@
                 android:id="@+id/bpm_tv_frf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Get Heart Rate Data"
                 android:layout_margin="20dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:fontFamily="@font/orbitron_bold"
+                android:text="Get Heart Rate Data"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -66,8 +68,10 @@
             android:id="@+id/Login_bv_frf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/orbitron_bold"
             android:foregroundTint="@color/white"
             android:text="@string/login"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

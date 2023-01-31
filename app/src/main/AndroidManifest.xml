@@ -31,7 +31,8 @@
         <activity
             android:name=".healthConnect.DateActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -39,7 +40,8 @@
         <activity
             android:name=".bluetooth.ECGHome"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -47,12 +49,14 @@
         <activity
             android:name=".bluetooth.AvailableDevicesActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".healthConnect.HealthConnectActivity"
             android:enabled="true"
             android:exported="true"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait">
 
             <!-- TODO: Required to specify which Health Connect permissions the app can request -->
             <meta-data
@@ -66,7 +70,8 @@
         <activity
             android:name=".healthConnect.ReadDataActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".fitbit.FitbitActivity"
             android:exported="true"
@@ -84,7 +89,8 @@
         <activity
             android:name=".ppg.PPGActivity"
             android:exported="false"
-            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar" />
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
