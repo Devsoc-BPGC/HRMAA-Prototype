@@ -1,6 +1,7 @@
 package com.devsoc.hrmaa.fitbit.fragments
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,6 +38,7 @@ class HeartRateFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_heart_rate, container, false)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
     }
 

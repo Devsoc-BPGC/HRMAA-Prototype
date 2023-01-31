@@ -1,6 +1,7 @@
 package com.devsoc.hrmaa.fitbit.fragments
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,7 +46,7 @@ class FitbitRedirectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fitbit_redirect, container, false)
-
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
 
     }

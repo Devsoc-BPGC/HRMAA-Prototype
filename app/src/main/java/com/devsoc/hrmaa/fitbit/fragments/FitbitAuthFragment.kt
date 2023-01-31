@@ -1,5 +1,6 @@
 package com.devsoc.hrmaa.fitbit.fragments
 
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ class FitbitAuthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fitbit_auth, container, false)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
     }
 

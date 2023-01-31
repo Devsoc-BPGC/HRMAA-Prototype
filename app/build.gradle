@@ -57,6 +57,10 @@ dependencies {
     //Gson
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
+    //Http
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    //Graph plotter
+    implementation 'com.jjoe64:graphview:4.2.2'
 
 }

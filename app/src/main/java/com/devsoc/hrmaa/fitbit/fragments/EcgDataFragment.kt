@@ -1,6 +1,7 @@
 package com.devsoc.hrmaa.fitbit.fragments
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,12 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsoc.hrmaa.R
 import com.devsoc.hrmaa.databinding.FragmentEcgDataBinding
-import com.devsoc.hrmaa.fitbit.dataclasses.AuthInfo
-import com.devsoc.hrmaa.fitbit.dataclasses.EcgData
-import com.devsoc.hrmaa.fitbit.dataclasses.HeartRateSeries
-import com.devsoc.hrmaa.fitbit.dataclasses.TokenData
+import com.devsoc.hrmaa.fitbit.adapters.EcgAdapter
+import com.devsoc.hrmaa.fitbit.dataclasses.*
 import com.devsoc.hrmaa.fitbit.interfaces.RestApi
 import com.devsoc.hrmaa.fitbit.objects.ServiceBuilder
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,6 +37,7 @@ class EcgDataFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ecg_data, container, false)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         return binding.root
 
     }
@@ -156,9 +158,23 @@ class EcgDataFragment : Fragment() {
                     Log.d("ECG Response Code", "${response.raw().code}")
                     if (response.raw().code == 200 && ecgData != null) {
                         val ecgReadings = ecgData.ecgReadings
-                        var data = ""
-                        if(ecgReadings.isNotEmpty()){
-                            //TODO
+                        if(ecgReadings.isEmpty()){
+                            binding.dataTvEdf.text = ""
+                            val ecg = mutableListOf<EcgReading>(
+                                EcgReading(69, "XYZ", "","", 1, 100, "","",10000, "2023-01-31 10pm",
+                                    mutableListOf<Int>(0))
+                            )
+                            val adapter = EcgAdapter(ecg)
+                            binding.ecgRvEdfg.apply {
+                                this.adapter = adapter
+                                layoutManager = LinearLayoutManager(context)
+                            }
+                            adapter.onItemClick = {
+                                findNavController().navigate(R.id.action_fitbitDataFragment_to_ecgGraphFragment)
+                            }
+                        }
+                        else {
+                            binding.dataTvEdf.text = "No ECG Data found!"
                         }
                     } else {
                         Log.d("ECG Response", response.raw().message)

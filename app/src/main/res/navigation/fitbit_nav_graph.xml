@@ -28,15 +28,19 @@
             />
         <action
             android:id="@+id/action_fitbitRedirectFragment_to_fitbitDataFragment"
-            app:destination="@id/fitbitDataFragment" />
+            app:destination="@id/ecgDataFragment" />
         <action
             android:id="@+id/action_fitbitRedirectFragment_to_heartRateFragment"
             app:destination="@id/heartRateFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fitbitDataFragment"
+        android:id="@+id/ecgDataFragment"
         android:name="com.devsoc.hrmaa.fitbit.fragments.EcgDataFragment"
-        android:label="FitbitDataFragment" />
+        android:label="FitbitDataFragment" >
+        <action
+            android:id="@+id/action_fitbitDataFragment_to_ecgGraphFragment"
+            app:destination="@id/ecgGraphFragment" />
+    </fragment>
     <fragment
         android:id="@+id/heartRateFragment"
         android:name="com.devsoc.hrmaa.fitbit.fragments.HeartRateFragment"
@@ -53,5 +57,13 @@
         <argument
             android:name="activities"
             app:argType="com.devsoc.hrmaa.fitbit.dataclasses.ActivitiesHeart"/>
+    </fragment>
+    <fragment
+        android:id="@+id/ecgGraphFragment"
+        android:name="com.devsoc.hrmaa.fitbit.fragments.EcgGraphFragment"
+        android:label="EcgGraphFragment" >
+        <action
+            android:id="@+id/action_ecgGraphFragment_to_fitbitDataFragment"
+            app:destination="@id/ecgDataFragment" />
     </fragment>
 </navigation>
