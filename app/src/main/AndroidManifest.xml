@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.devsoc.hrmaa">
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- To check whether healthcore apk is installed or not -->
     <queries>
         <package android:name="com.google.android.apps.healthdata" />
     </queries>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"

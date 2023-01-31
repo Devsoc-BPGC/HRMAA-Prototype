@@ -13,39 +13,63 @@
         tools:context=".fitbit.fragments.FitbitAuthFragment">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/ecg_cv_frf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintVertical_bias="0.35"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp">
 
             <TextView
-                android:id="@+id/code_tv_frf"
-                android:padding="8dp"
-                android:layout_margin="8dp"
-                android:textSize="18sp"
+                android:id="@+id/ecg_tv_frf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_code_found"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/white"
-                />
+                android:text="Get ECG Data"
+                android:layout_margin="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bpm_cv_frf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ecg_cv_frf"
+            app:layout_constraintVertical_bias="0.20"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp">
+
+            <TextView
+                android:id="@+id/bpm_tv_frf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Heart Rate Data"
+                android:layout_margin="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
 
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/Login_bv_frf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Login_bv_frf"
-            android:text="@string/login"
             android:foregroundTint="@color/white"
+            android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
