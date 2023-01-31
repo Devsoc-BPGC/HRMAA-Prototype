@@ -69,7 +69,8 @@
             android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar"/>
         <activity
             android:name=".fitbit.FitbitActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.HRMAA_PROTOTYPE.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
