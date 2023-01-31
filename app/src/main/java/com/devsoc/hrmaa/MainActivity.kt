@@ -3,11 +3,9 @@ package com.devsoc.hrmaa
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
-import androidx.health.connect.client.HealthConnectClient
 import com.devsoc.hrmaa.bluetooth.AvailableDevicesActivity
 import com.devsoc.hrmaa.databinding.ActivityMainBinding
 import com.devsoc.hrmaa.ecg.ECGActivity
@@ -41,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         binding.ppgCvMa.setOnClickListener {
             startActivity(Intent(this, PPGActivity::class.java))
         }
-        binding.ecgCvMa.setOnClickListener {
-            startActivity(Intent(this, AvailableDevicesActivity::class.java))
+        binding.ecgCvMa.setOnClickListener{
+            startActivity(Intent(this,ECGHome::class.java))
         }
 
 

@@ -27,7 +27,7 @@ class AvailableDevicesActivity : AppCompatActivity(),DeviceAdapter.OnDeviceInfoL
     lateinit var rvAvailableDevices: RecyclerView
     lateinit var blueAdapt :BluetoothAdapter
     lateinit var progressBar: ProgressBar
-    lateinit var  pairedDevices: MutableList<BluetoothDevice>
+    lateinit var pairedDevices: MutableList<BluetoothDevice>
     var availDevList = mutableListOf<BluetoothDevice>()
 
     lateinit var btnDiscover: Button
